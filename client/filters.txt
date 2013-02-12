@@ -1,4 +1,2 @@
 #These are filters, each filter goes on its own line
 #keyword1 keyword2 keyword3|path
-
-#DO NOT LEAVE ANY EMPTY LINES AT THE BOTTOM OF THIS FILE

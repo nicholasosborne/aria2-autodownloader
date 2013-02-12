@@ -22,7 +22,7 @@ $filters = array();
 while (!feof($handle)) {
 	$line = str_replace("\n","",fgets($handle));
 	
-	if($line[0] != '#'){
+	if(strlen($line) > 0 && $line[0] != '#'){
 		$temp = explode("|", $line); //0 = conditions #1 = path
 		if(!isset($temp[1])){
 			$temp[1]=DEFAULTPATH;
@@ -54,10 +54,12 @@ $buffer = curl_exec($curl_handle);
 curl_close($curl_handle);
 $result = json_decode($buffer);
 	
-#Write the new timestamp to the file
-$handle = fopen('timestamp', 'w') or die('Cannot create file');
-fwrite($handle, $result->time);
-fclose($handle);
+#Write the new timestamp to the file 
+if(isset($result->time)){
+	$handle = fopen('timestamp', 'w') or die('Cannot create file');
+	fwrite($handle, $result->time);
+	fclose($handle);
+}
 
 #Initialize Aria2
 $aria2 = new aria2(ARIA2PATH);
